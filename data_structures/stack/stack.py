@@ -20,7 +20,10 @@ class Stack:
         Add the element ‘element’ at the top of stack
         :param element: element to add to stack
         """
-        self.data.append(element)
+        if len(self.data) >= 10:
+            return 'Exceeded maximum size.'
+        else:
+            self.data.append(element)
 
     def pop(self):
         """
