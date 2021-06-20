@@ -15,22 +15,22 @@ class Queue_:
 
     # pylint: disable=unused-argument,missing-module-docstring
     def __init__(self, data: Iterable = (), max_size: int = None):
-        self.data = []
-        for element in data:
-            self.data.insert(0, element)
+        self.data = [[]]*6
 
-    def put(self, element):
+
+    def put(self, element, priority):
         """
         Add the element ‘element’ at the end of queue_
         :param element: element to add to queue_
         """
-        self.data.insert(0, element)
+        self.data[priority].insert(0, element)
+
 
     def get(self):
         """
         Remove and return an item from queue_
         """
-        return self.data.pop(-1)
+        return self.data[0].pop(-1)
 
     def empty(self) -> bool:
         """
