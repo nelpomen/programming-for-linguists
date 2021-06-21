@@ -22,12 +22,6 @@ class ReversePolishNotationConverterState:
             self.stack.pop()
         self.stack.pop()
 
-    def pop_from_stack_until_opening_bracket(self):
-        """
-        Help function
-        :return:
-        """
-
 
 class ReversePolishNotationConverter:
     def __init__(self, infix_string: str):
@@ -36,7 +30,6 @@ class ReversePolishNotationConverter:
         self.stack = Stack()
     point = '.'
 
-    @staticmethod
     def convert(self, expression_in_infix_notation: str) -> ReversePolishNotation:
         while not self._infix_notation.empty():
             character = self._infix_notation.get()
@@ -61,7 +54,12 @@ class ReversePolishNotationConverter:
             self.stack.pop()
         return self._postfix_notation
 
-    @staticmethod
+    def pop_from_stack_until_opening_bracket(self):
+        while not self.is_opening_bracket(self.stack.top()):
+            self._postfix_notation.put_operator(self.stack.top())
+            self.stack.pop()
+        self.stack.pop()
+
     def pop_from_stack_until_prioritizing(self, operator: Op, state: ReversePolishNotationConverterState):
         current_priority = operator.priority
         while not self.stack.empty() and self.stack.top().priority > current_priority:
@@ -69,7 +67,6 @@ class ReversePolishNotationConverter:
             self.stack.pop()
         self.stack.push(operator)
 
-    @staticmethod
     def read_digit(self, character: str) -> Digit:
         digit = character
         while not self._infix_notation.empty() and self.is_part_of_digit(self._infix_notation.top()):
